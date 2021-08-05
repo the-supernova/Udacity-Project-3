@@ -63,9 +63,12 @@ Complete a month cost analysis of each Azure resource to give an estimate total 
 
 | Azure Resource | Service Tier | Monthly Cost |
 | ------------ | ------------ | ------------ |
-| *Azure Postgres Database* |     |              |
-| *Azure Service Bus*   |         |              |
-| ...                   |         |              |
+| *Azure Postgres Database* |  Basic   |   $32.82           |
+| *Azure Service Bus*   |    Basic     |     $0.05        |
+| *Azure App Service* |    Basic; B1     |      $13.14        |
+| *Storage Accounts* | Basic | $0.05 |
 
 ## Architecture Explanation
-This is a placeholder section where you can provide an explanation and reasoning for your architecture selection for both the Azure Web App and Azure Function.
+Azure App Service is chosen over lift and shift method migration using VMs since it requires fewer administrative tasks and takes care of the server & security maintenance and usually less expensive for small applications. The division between the background processes and principal app allows for more efficient services that can be scaled independently hence improving performance. By using a shared app service plan for both the web app and the function app a higher cost optimization is achieved.
+
+Maintaining the back-end job in a separate function speeds up the front-end application in times of high traffic and ensures strong responsiveness of the application. The service bus queue makes it easy to scale up and out according to traffic and number of notifications queued. This delivers a scalable, cheap and performing web app with microservices which are easier to maintain.
